@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Vuetify server-side v-data-table with search</title>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'>
+<link rel='stylesheet' href='https://unpkg.com/vuetify@1.0.18/dist/vuetify.min.css'>
+<link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="app">
+    <v-app id="inspire">
+            <v-alert
+            v-model="alert"
+            border="left"
+            close-text="Close"
+            color="deep-purple accent-4"
+            dark
+            dismissible
+          >
+            Download Request Submitted.!! URL : {{rurl}}
+          </v-alert>
+
+        <div class="px-2">
+            <div style="padding: 10px;"></div>
+            <h2 align="center">Download Service</h2>
+            <div>
+                    <template>
+                            <v-text-field :rules="rules" v-model="rurl" label="Enter URL" ></v-text-field>
+                            <div class="text-center">
+                                    <v-btn color="success" dark @click="requestDownload">Submit</v-btn>
+                            </div>
+                            
+                          </template>
+                          
+            </div>
+            <v-text-field label="search" v-model="search"></v-text-field>
+            <v-data-table :headers="headers" 
+                          :items="desserts" 
+                          :pagination.sync="pagination" 
+                          :total-items="totalDesserts" 
+                          :loading="loading" 
+                          class="elevation-4">
+                <template slot="items" slot-scope="props">
+                  <td>{{ props.item.name }}</td>
+                  <td class="text-xs-right">{{ props.item.ctime }}</td>
+                  <td class="text-xs-right">{{ props.item.size }}</td>
+                  <td class="text-xs-right">
+                        <v-btn class="ma-2" color="indigo" dark @click="downloadFile(props.item)">
+                                <v-icon>cloud_download</v-icon>
+                        </v-btn>
+                        
+                  </td> 
+                  
+                </template>
+            </v-data-table>
+            
+        </div>
+    </v-app>
+</div>
+<!-- partial -->
+  <script src='https://unpkg.com/babel-polyfill/dist/polyfill.min.js'></script>
+<script src='https://unpkg.com/vue/dist/vue.js'></script>
+<script src='https://unpkg.com/vuetify@1.0.18/dist/vuetify.min.js'></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script  src="js/script.js"></script>
+
+</body>
+</html>
