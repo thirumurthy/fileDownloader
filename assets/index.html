@@ -22,6 +22,17 @@
             Download Request Submitted.!! URL : {{rurl}}
           </v-alert>
 
+          <v-alert
+          v-model="delalert"
+          border="left"
+          close-text="Close"
+          color="deep-purple accent-4"
+          dark
+          dismissible
+        >
+          File Deleted : {{filename}}
+        </v-alert>
+
         <div class="px-2">
             <div style="padding: 10px;"></div>
             <h2 align="center">Download Service</h2>
@@ -49,6 +60,9 @@
                   <td class="text-xs-right">
                         <v-btn class="ma-2" color="indigo" dark @click="downloadFile(props.item)">
                                 <v-icon>cloud_download</v-icon>
+                        </v-btn>
+                        <v-btn class="ma-2" color="error" dark @click="deleteFile(props.item)">
+                          <v-icon>delete_forever</v-icon>
                         </v-btn>
                         
                   </td> 

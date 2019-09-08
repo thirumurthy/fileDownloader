@@ -12,6 +12,8 @@ new Vue({
       search: "",
       rurl:"",
       alert : false,
+      delalert : false,
+      filename : "",
       totalDesserts: 0,
       desserts: [],
       loading: true,
@@ -63,6 +65,27 @@ new Vue({
     downloadFile(item){
       console.log(item);
       window.open("/getfile/"+escape(item.name), "_blank")
+    },
+    deleteFile(item){
+      this.loading = true;
+      let URL = "/deletefile/"+ item.name;
+      this.filename = item.name;
+      let _self= this;
+        axios.get(URL).then((response) => {
+          console.log(response.data)
+          if(response.data == "success"){
+            _self.delalert  = true;
+            setTimeout(() => {
+              _self.getDataFromApi().then(data => {
+                this.desserts = data.items;
+                this.totalDesserts = data.total;
+              });
+              
+            }, 300);
+          }
+          this.loading = false
+
+        });
     },
     requestDownload(){
       this.loading = true;

@@ -35,6 +35,11 @@ def send_js(path):
 def send_file(file):
     return send_from_directory('files', file)
 
+@app.route('/deletefile/<string:file>')
+def delete_file(file):
+    os.remove('files/'+file)
+    return "success"
+
 @app.route('/getfileinfo')
 def getfileDetails():
     finfo =[]
