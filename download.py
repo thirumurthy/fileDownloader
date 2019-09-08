@@ -6,32 +6,28 @@ from urllib.parse import unquote
 PY3 = sys.version_info[0] >= 3
 if PY3: #python3
     from urllib.parse import urlparse
+    from urllib.request import urlopen
 else: #python2
     from urlparse import urlparse
+    from urllib2 import urlopen # Python 2
 
 
-if len (sys.argv) != 2 :
-    print("Usage: python download.py <<url>>")
-    sys.exit (1)
-
-link = sys.argv[1:][0]
+#if len (sys.argv) != 2 :
+#    print("Usage: python download.py <<url>>")
+#    sys.exit (1)
+#
+#link = sys.argv[1:][0]
+link = 'https://nl18.seedr.cc/ff_get/510875226/www.TamilRockers.ws%20-%20X-Men%20Dark%20Phoenix%20(2019)[720p%20-%20BDRip%20-%20Org%20Auds%20[Tamil%20%20Telugu%20%20Hindi]%20-%20AC3%205.1%20-%20HEVC].mkv?st=v_kl_vuJ6OenhFktGNYb8w&e=1568024548'
 if not os.path.exists("files"):
     os.makedirs("files")
 file_name=os.path.normpath("files/"+unquote(os.path.basename(urlparse(link).path)))
 print("Filename: "+file_name)
-with open(file_name, "wb") as f:
-        print("Downloading %s" % file_name)
-        response = requests.get(link, stream=True)
-        total_length = response.headers.get('content-length')
-
-        if total_length is None: # no content length header
-            f.write(response.content)
-        else:
-            dl = 0
-            total_length = int(total_length)
-            for data in response.iter_content(chunk_size=4096):
-                dl += len(data)
-                f.write(data)
-                done = int(50 * dl / total_length)
-                sys.stdout.write("\r[%s%s]" % ('=' * done, ' ' * (50-done)) )    
-                sys.stdout.flush()
+print("Downloading %s" % file_name)
+response = urlopen(link)
+CHUNK = 16 * 1024
+with open(file_name, 'wb') as f:
+    while True:
+        chunk = response.read(CHUNK)
+        if not chunk:
+            break
+        f.write(chunk)
