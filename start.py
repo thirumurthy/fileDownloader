@@ -23,7 +23,7 @@ def root():
 @app.route('/download/request')  
 def saveDownload(): 
     durl = request.args.get('durl')
-    process = subprocess.Popen(['python' , 'download.py', durl ], stdout=subprocess.PIPE)
+    process = subprocess.Popen(['python3' , 'download.py', durl ], stdout=subprocess.PIPE)
     out, err = process.communicate()
     return "submitted"
 
