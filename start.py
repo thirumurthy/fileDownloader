@@ -25,6 +25,8 @@ def saveDownload():
     durl = request.args.get('durl')
     process = subprocess.Popen(['python3' , 'download.py', durl ], stdout=subprocess.PIPE)
     out, err = process.communicate()
+    logger.error("output:"+out)
+    logger.error("error:"+err)
     return "submitted"
 
 @app.route('/js/<path:path>')
