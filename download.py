@@ -35,6 +35,7 @@ if __name__ =='__main__':
  if not os.path.exists("files"):
     os.makedirs("files")
  file_name=os.path.normpath("files/"+unquote(os.path.basename(urlparse(link).path)))
+ logger.error("filename :"+file_name)
  print("Filename: "+file_name)
  print("Downloading %s" % file_name)
  response = urlopen(link)
