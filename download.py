@@ -38,11 +38,14 @@ if __name__ =='__main__':
  logger.error("filename :"+file_name)
  print("Filename: "+file_name)
  print("Downloading %s" % file_name)
- response = urlopen(link)
- CHUNK = 16 * 1024
- with open(file_name, 'wb') as f:
-    while True:
+ try:
+   response = urlopen(link)
+   CHUNK = 16 * 1024
+   with open(file_name, 'wb') as f:
+     while True:
         chunk = response.read(CHUNK)
         if not chunk:
             break
         f.write(chunk)
+  except Exception as e:
+    logger.error(e)
