@@ -31,6 +31,7 @@ if __name__ =='__main__':
     sys.exit (1)
 
  link = sys.argv[1:][0]
+ logger.error("link :"+link)
 #link = 'https://nl27.seedr.cc/ff_get/515994809/www.TamilRockers.ws%20-%20Bakrid%20(2019)%20Tamil%20HDRip%20x264%20400MB.mkv?st=mK8oo4-6kipmBM5D9W0hNA&e=1568945595'
 if not os.path.exists("files"):
     os.makedirs("files")
