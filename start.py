@@ -24,11 +24,7 @@ def root():
 def saveDownload():
     data = request.get_json()
     durl = data.get("durl", "")
-    logger.error("got from web durl:" + durl)
     process = subprocess.Popen(['python3', 'download.py', durl])
-    # out, err = process.communicate()
-    # logger.error("output:"+out)
-    # logger.error("error:"+err)
     return "submitted"
 
 
