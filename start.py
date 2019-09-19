@@ -20,13 +20,15 @@ def root():
     return app.send_static_file('index.html')
 
 
-@app.route('/download/request')  
+@app.route('/download/request', methods=['GET', 'POST'])  
 def saveDownload(): 
-    durl = request.args.get('durl') 
+    data = request.get_json()
+    durl = data.durl 
+    logger.error("got from web durl:"+durl)
     process = subprocess.Popen(['python3' , 'download.py', durl ], stdout=subprocess.PIPE)
-    out, err = process.communicate()
-    logger.error("output:"+out)
-    logger.error("error:"+err)
+    #out, err = process.communicate()
+    #logger.error("output:"+out)
+    #logger.error("error:"+err)
     return "submitted"
 
 @app.route('/js/<path:path>')

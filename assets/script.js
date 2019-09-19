@@ -91,7 +91,14 @@ new Vue({
       this.loading = true;
       let URL = "/download/request?durl="+ this.rurl;
       let _self= this;
-        axios.get(URL).then((response) => {
+      axios({
+        method: 'post',
+        url: '/download/request',
+        headers: {}, 
+        data: {
+          'durl': this.rurl, // This is the body part
+        }
+      }).then((response) => {
           console.log(response.data)
           if(response.data == "submitted"){
             _self.alert = true;
